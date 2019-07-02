@@ -13,25 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __LOAD_BALANCER_OMNET_ROUTERWS_H_
-#define __LOAD_BALANCER_OMNET_ROUTERWS_H_
-
-#include <omnetpp.h>
-#include "Router.h"
-#include "SelectionStrategies.h"
-
-using namespace omnetpp;
-
-/**
- * TODO - Generated class
- */
-class RouterWS : public queueing::Router
+//
+// TODO auto-generated module
+//
+simple RouterD
 {
-  private:
-    queueing::SelectionStrategy *selectionStrategy;
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-#endif
+    parameters:
+        @group(Queueing);
+        @display("i=block/routing");
+        int delta = default(0);  
+        volatile int randomGateIndex = default(intuniform(0, sizeof(out)-1));    // the destination gate in case of random routing
+    gates:
+        input in;
+        output out[2];
+}

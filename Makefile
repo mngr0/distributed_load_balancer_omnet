@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for distributed_balancing
+# OMNeT++/OMNEST Makefile for distributed_load_balancer_omnet
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -KQUEUEINGLIB_PROJ=/home/marco/Space/omnetpp-5.4.1/samples/queueinglib -DQUEUEING_IMPORT -I. -I$$\(QUEUEINGLIB_PROJ\) -L$$\(QUEUEINGLIB_PROJ\) -lqueueinglib$$\(D\)
+#  opp_makemake -f --deep -O out -KQUEUEINGLIB_PROJ=../queueinglib -DQUEUEING_IMPORT -I. -I$$\(QUEUEINGLIB_PROJ\) -L$$\(QUEUEINGLIB_PROJ\) -lqueueinglib$$\(D\)
 #
 
 # Name of target to be created (-o option)
-TARGET = distributed_balancing$(D)$(EXE_SUFFIX)
+TARGET = distributed_load_balancer_omnet$(D)$(EXE_SUFFIX)
 TARGET_DIR = .
 
 # User interface (uncomment one) (-u option)
@@ -30,7 +30,7 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS = $O/RouterWS.o
+OBJS = $O/RouterD.o
 
 # Message files
 MSGFILES =
@@ -39,7 +39,7 @@ MSGFILES =
 SMFILES =
 
 # Other makefile variables (-K)
-QUEUEINGLIB_PROJ=/home/marco/Space/omnetpp-5.4.1/samples/queueinglib
+QUEUEINGLIB_PROJ=../queueinglib
 
 #------------------------------------------------------------------------------
 

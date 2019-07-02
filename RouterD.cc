@@ -15,31 +15,37 @@
 
 #include <omnetpp.h>
 
-#include "RouterWS.h"
-#include "SelectionStrategies.h"
+#include "RouterD.h"
+#include "PassiveQueue.h"
 
-Define_Module(RouterWS);
+Define_Module(RouterD);
 
-void RouterWS::initialize()
+void RouterD::initialize()
 {
     // TODO - Generated method body
     //Router::initialize();
-    //selectionStrategy = queueing::SelectionStrategy::create("random", this, false);
-    //selectionStrategy = queueing::SelectionStrategy::create("roundRobin", this, false);
-    selectionStrategy = queueing::SelectionStrategy::create("shortestQueue", this, false);
-    if (!selectionStrategy)
-        throw cRuntimeError("invalid selection strategy");
+
 }
 
-void RouterWS::handleMessage(cMessage *msg)
+void RouterD::handleMessage(cMessage *msg)
 {
 
     //Router::handleMessage(msg);
     // TODO - Generated method body
     int outGateIndex = -1;  // by default we drop the message
-    outGateIndex = selectionStrategy->select();
-    // send out if the index is legal
+
+    cModule *moduleMain = gate("out",0)->getNextGate()->getOwnerModule();
+    int lenghtMain = (dynamic_cast<queueing::PassiveQueue *>(moduleMain))->length();
+
+    outGateIndex=0;
+
+    cModule *moduleSecondary = gate("out",1)->getNextGate()->getOwnerModule();
+    int lenghtSecondary = (dynamic_cast<queueing::PassiveQueue *>(moduleSecondary))->length();
+
+    if (lenghtMain-lenghtSecondary >= par("delta").intValue() ) {
+        outGateIndex=1;
+    }
     if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
-       throw cRuntimeError("Invalid output gate selected during routing");
+        throw cRuntimeError("Invalid output gate selected during routing");
     send(msg, "out", outGateIndex);
 }

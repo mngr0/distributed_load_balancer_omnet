@@ -36,10 +36,10 @@ network Distributed_balancing
         source1: Source {
             @display("p=66,187");
         }
-        router: Router {
+        router: RouterD {
             @display("p=164,187");
         }
-        router1: Router {
+        router1: RouterD {
             @display("p=164,58");
         }
         passiveQueue: PassiveQueue {
@@ -61,8 +61,8 @@ network Distributed_balancing
             @display("p=436,58");
         }
     connections:
-        source.out --> router1.in++;
-        source1.out --> router.in++;
+        source.out --> router1.in;
+        source1.out --> router.in;
         router.out++ --> passiveQueue.in++;
         router.out++ --> passiveQueue1.in++;
         router1.out++ --> passiveQueue1.in++;
